@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/MainStyle.css}"/>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        img:hover {
+            border: 3px solid black;
+        }
+        a{
+            color: white;
+            margin-left: 5px;
+        }
+        a:hover{
+            color: #9b9b9b;
+        }
+    </style>
+    <script>
+        var actors="";
+        function addactor(actor_id) {
+            actors+=actor_id+",";
+            var id= "img"+actor_id;
+            document.getElementById(id).style =" border: 3px solid green; filter: grayscale(100%);";
+
+        }
+    </script>
+</head>
+<body style="background: #1e1b26; color: white;  ">
+<div th:if="null!=${user}">
+    <div th:if="${user.getRole()=='admin'}">
+
+        <nav class="bannerA">
+            <div class="navBG">
+                <a class="btn a" style="right:5px" th:href="@{/manageMovies}">Movies</a>
+                <a class="btn a" style="right:90px" th:href="@{/ManageActors}">Actors</a>
+
+                <img class="btn b" style="left:0px" th:src="@{/img/Logo.png}" th:href="@{/}">
+
+                <div th:if="${user}">
+                    <img class="" style="width: 100px; height: 70px; margin-left: 70px; margin-right: 20px;  "  th:src="${user.getUser_image()}">
+                    <a class="btn a"  th:href="@{/logout}">log out</a>        </div>
+
+            </div>
+        </nav>
+
+
+    <div class="row" height="100%" th:style=" 'margin-top: 15xpx; color:white; background:url(' + @{/img/zinc1.png} + ')no-repeat ;   background-size: cover; background-position: top;  width: 100%; height: 100%;' ">
+
+    <div class="col" style="margin-left: 25px; " height="900px">
+
+        <h1 class="pb-2">Add a new Actor</h1>
+        <form action="#" th:action="@{/addActor}" th:object="${newActor}" method="post" width="fill" >
+            <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor title </p>
+            <input class="col-md-4 text-center" type="text" th:field="*{actor_name}" />
+            <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor Image </p>
+            <input class="col-md-4 text-center" type="text" th:field="*{actor_profile_image}" />
+            <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor Age</p>
+            <input type="number" class="col-md-4 text-center"  th:field="*{actor_age}" />
+            <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor gender</p>
+            <input class="col-md-4 text-center" type="text" th:field="*{actor_gender}" />
+            <br/>
+            <input class="log" type="reset" value="Reset"/>
+            <input class="log" type="submit" value="Submit"/>
+        </form>
+    </div>
+    </div>
+
+
+</div>
+    <div th:if="${user.getRole()=='user'}">
+        <p > You have no access rights to this page </p>
+    </div>
+</div>
+<div th:if="${user==null}">
+    <p > You have no access rights to this page </p>
+</div>
+
+
+
+</body>
+</html>

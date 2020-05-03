@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Books - Bookcase</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script>
+        $("#SelectAccount").change(function() {
+            //hide social worker and sponsor stuff
+            val = $(this).val();
+            if (val == 'Social_Worker') {
+                //show social worker stuff
+            } else {
+                //show sponsor stuff
+            }
+        });
+
+    </script>
+</head>
+<body>
+
+
+<table class="table table-hover text-center">
+    <tr>
+        <td>Review Id</td> <td>user ID</td> <td>Movie ID</td>
+        <td> Review Comment</td>
+        <td> review Rating</td>
+        <td>Review Date</td>
+    </tr>
+    <tr  th:each="review1 :${reviews}" >
+        <td class="align-middle" th:text="${review1.getReview_id()}"></td>
+        <td class="align-middle" th:text="${review1.getUser_id()}"></td>
+        <td class="align-middle" th:text="${review1.getMovie_id()}"></td>
+        <td class="align-middle" th:text="${review1.getReview_comment()}"></td>
+        <td class="align-middle" th:text="${review1.getReview_rating()}"></td>
+        <td class="align-middle" th:text="${review1.getReview_date()}"></td>
+
+    </tr>
+</table>

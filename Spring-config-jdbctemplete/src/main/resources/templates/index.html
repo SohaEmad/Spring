@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../static/css/pages/landing_style.css" th:href="@{/css/pages/landing_style.css}">
+    <link rel="stylesheet" href="../../static/css/component/footer.css" th:href="@{/css/component/footer.css}">
+    <link rel="stylesheet" href="../../static/css/component/header.css" th:href="@{/css/component/header.css}">
+    <link rel="stylesheet" href="../../static/css/component/search_rang.css" th:href="@{/css/component/search_rang.css}">
+    <script src="../../static/js/search.js" th:src="@{/js/search.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <div id="wrapper">
+
+        <header>
+
+            <nav>
+
+                <img class="logo" th:src="@{/img/logo.png}"/>
+                <ul class="nav">
+                    <li class="active"><a th:href="@{/}">movies</a></li>
+                    <li ><a th:href="@{/viewActors}">celebs & photos</a></li>
+
+                </ul>
+                <div th:unless="${user}" class="user">
+                    <div class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="margin-right: 9px;">Login</a>
+                    <ul class="dropdown-menu form-wrapper" style="width: 300px; background: none;">
+                        <li>  <form action="#" th:action="@{/loginProcess}" th:object="${login}" method="post" style="background: none;">
+                                <div class="form-group" >
+                                    <input type="text" class="form-control" placeholder="Username" required="required" th:field="*{username}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password" required="required" th:field="*{password}">
+                                </div>
+                                <input type="submit" class="btn btn-primary btn-block form_but" value="Login"></input>
+                                <div class="form-footer">
+                                    <br>
+                                    <a href="#">Forgot Your password?</a>
+                                <p th></p>
+                                    <hr>
+                                </div>
+                                <button href="#" class="btn btn-primary  btn-block" value=" Facebook"><i class="fa fa-facebook"></i></button>
+                                <button href="#" class="btn btn-info  btn-block" value="Twitter"><i class="fa fa-twitter"></i> </button>
+
+                            </form>
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="dropdown">
+
+                    <a data-toggle="dropdown" class=" dropdown-toggle" href="#">sign up</a>
+                    <ul class="dropdown-menu form-wrapper" style="width: 300px; background: none;">
+                        <li>
+                            <form action="" method="post">
+                                <p class="hint-text">Fill in this form to create your account!</p>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Username" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Confirm Password" required="required">
+                                </div>
+                                <div class="form-group">
+                                    <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms &amp; Conditions</a></label>
+                                </div>
+                                <input type="submit" class="btn btn-primary btn-block" value="Sign up">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <div th:if="${user}">
+                <div class="user">
+                    <i class="fa fa-gear user-settings" ></i>
+                    <img class="user-icon" th:src="${user.getUser_image()}"src="https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg"/>
+                </div><!--user end-->
+                </div>
+            </nav>
+
+
+    <!--Navbar -->
+
+
+            <div class="movie-info">
+                <h1>Are you ready for</h1>
+                <ul >
+                    <li>24/7</li>
+                    <li>more than just Movies Reviews</li>
+                    <li>It's Movies Review Project</li>
+                </ul><!--genre-->
+                <button>About the Crazy programmers <i class="fa fa-user"></i></button>
+                <h3>to be evaluated </h3>
+                <h4>3 May, 2019 (UK)</h4>
+            </div><!--movie-info end-->
+
+        </header>
+<body>
+
+<main>
+
+    <ul class="options">
+        <li class="active">in theaters</li>
+        <li>charts</li>
+        <li>trailers</li>
+    </ul>
+
+    <div id="forms">
+        <div class="buttons">
+            <button class="btn" onclick="listView()"><i class="fa fa-navicon"></i></button>
+            <button class="btn active" onclick="gridView()"><i class="fa fa-th-large"></i></button>
+        </div>
+
+        <form id="range-form">
+            <p>IMDb Rating</p>
+            <div class="group">
+                <input id="range"  oninput="ratingFunction(this.value)" onchange="ratingFunction(this.value)" type="range" min="0.0" max="5.0" step="1.0" value="0">
+                <p id="results">0</p>
+            </div>
+        </form>
+
+        <form id="search-form">
+            <input id="search"  onkeyup="myFunction()" type="search" results="5" placeholder="Search Movies...">
+            <i class="fa fa-search"></i>
+        </form>
+    </div><!--forms-->
+
+    <section id="movies">
+
+        <figure th:each="m:${movie}" >
+        <a  th:href="@{/viewMovie(id=${m.movie_id})}">
+            <img th:src="${m.movie_cover_image}"  />
+        </a>
+            <figcaption>
+                <h5 th:text=" ${m.movie_title}"></h5>
+                <p th:text="${m.movie_genre}"></p>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <h4 th:text=" ${m.avg_rate}"></h4>
+                </div>
+            </figcaption>
+        </figure>
+
+    </section>
+</main><!--container end-->
+<footer>
+    <div>
+        <h3>ZANCC</h3>
+        <div class="social-links">
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-instagram"></i>
+        </div><!--social-links end-->
+        <p>2019  ZANCC.com, DevAcademy</p>
+    </div>
+</footer>
+</div><!--wrapper end-->
+</body>

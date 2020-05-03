@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Books - Bookcase</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <script>
+        $("#SelectAccount").change(function() {
+            //hide social worker and sponsor stuff
+            val = $(this).val();
+            if (val == 'Social_Worker') {
+                //show social worker stuff
+            } else {
+                //show sponsor stuff
+            }
+        });
+
+        function rowClicked(value) {
+            location.href = "/amovie?id=" + value;
+        }
+    </script>
+</head>
+<body>
+
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Movie Category
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+
+        <li><a href="movies/?category=Action">Action</a></li>
+        <li><a href="movies/?category=Adventure">Adventure</a></li>
+        <li><a href="movies/?category=Fantsy">Fantsy </a></li>
+        <li><a href="movies/?category=Horror">Horror</a></li>
+        <li><a href="movies/?category=Sci-Fi">Sci-Fi</a></li>
+        <li><a href="movies/?category=Animation">Animation </a></li>
+        <li><a href="movies/?category=Comdey">Comdey</a></li>
+        <li><a href="movies/?category=Drama">Drama</a></li>
+        <li><a href="movies/?category=Mystery">Mystery </a></li>
+
+    </ul>
+</div>
+<table class="table table-hover text-center">
+    <thead class="thead-dark">
+    <tr>
+        <th class="align-middle" scope="col">#</th>
+        <th class="align-middle" scope="col">movie title</th>
+        <th class="align-middle" scope="col">movie Summery</th>
+        <th class="align-middle" scope="col">movie Duration</th>
+        <th class="align-middle" scope="col">movie genre</th>
+        <th class="align-middle" scope="col">movie release date</th>
+        <th class="align-middle" scope="col">movie cover image</th>
+        <th class="align-middle" scope="col">movie Trailer</th>
+    </tr>
+    </thead>
+    <tbody class="tbody-light">
+
+    <tr  th:each="movie :${movies}"  th:onclick="'javascript:rowClicked(\'' + ${movie.getMovie_id()} + '\');'">
+
+        <td class="align-middle" th:text="${movie.getMovie_id()}"></td>
+        <td>
+            <h5 class="align-middle" th:text="${movie.getMovie_title()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${movie.getMovie_summery()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${movie.getMovie_duration()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${movie.getMovie_genre()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${movie.getMovie_release_date()}"></h5>
+        </td>
+        <td>
+            <img class="align-middle" th:src="${movie.getMovie_cover_image()}"></img>
+        </td>
+        <td>
+            <iframe width="560" height="315" th:src="@{https://www.youtube.com/embed/{url}(url=${movie.getMovie_trailer()} )}" frameborder="1" alt="no video attached" autoplay=1 ></iframe>
+        </td>
+
+    </tr>
+    </form>
+    </tbody>
+</table>

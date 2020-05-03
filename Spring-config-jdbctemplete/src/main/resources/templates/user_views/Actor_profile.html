@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Actor</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../../static/css/component/footer.css" th:href="@{/css/component/footer.css}">
+    <link rel="stylesheet" href="../../static/css/component/header.css" th:href="@{/css/component/header.css}">
+    <link rel="stylesheet" href="../../static/css/component/actor_profile_style.css" th:href="@{/css/component/actor_profile_style.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,600" rel="stylesheet">
+
+    <title th:text="${actor.actor_name}"></title>
+<div   th:style="'background:url(' + @{/img/zinc1.png} + ')no-repeat ;  background-position: top;  width: 100%; height: 100%;' ">
+<nav class="navbar navbar-expand-sm navbar-inverse text-light">
+    <!-- Brand/logo -->
+    <a class="navbar-brand" href="#">
+        <img th:src="@{img/logo.png}" alt="logo" style="width:40px;">
+    </a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-light" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" th:href="@{/}">Movies</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-light" th:href="@{/viewActors}">Actors</a>
+        </li>
+    </ul>
+</nav>
+</div>
+    </head>
+
+<body  th:style="'background:url(' + @{/img/zinc1.png} + ')no-repeat ;  background-position: top;  width: 100%; height: 100%;' ">
+
+
+<div class="container">
+    <!-- Menu -->
+
+    <!-- Bio mini-facts  -->
+    <div class="info">
+        <!-- Image -->
+        <div class="image-container">
+            <img class="image" th:src="${actor.actor_profile_image}" th:alt="${actor.actor_name}">
+        </div>
+        <!-- Bio-facts -->
+
+    </div>
+
+    <!-- Full biography -->
+    <div class="biography">
+        <div class="biography-inner">
+            <!-- Search-bar -->
+
+            <div class="content">
+                <!-- Title/Name -->
+                <div class="heading">
+                    <h1 th:text="${actor.actor_name}">Hugh Laurie</h1>
+                </div>
+                <!-- Tags  -->
+                <div class="search-bar">
+
+                </div>
+                <!-- Main content -->
+                        <table class="table borderless text-light">
+                            <tr>
+                                <th>Gender</th>
+                                <th>Age</th>
+                                <th>Ethnicity</th>
+                            </tr>
+                            <tr >
+                                <td th:text="${actor.actor_gender}">Male</td>
+                                <td th:text="${actor.actor_age}">58</td>
+                                <td>English</td>
+                            </tr>
+
+
+                        </table>
+
+
+
+                <!-- Recent work  -->
+                <div th:if="${movies}">
+                <div  class="movie-reel">
+                    <div class="movie-reel-inner">
+                        <h3>Most recent work</h3>
+                        <div th:if="${movies}">
+                        <div  th:each="movie: ${movies}" class="movie">
+                            <img class="movie-poster" th:src="${movie.movie_cover_image}">
+                            <p class="show-title" th:text="${movie.movie_title}">The Canterville Ghost (2017)</p>
+                        </div>
+</div>
+
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="early-life-inner">
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+<footer id="footer" >
+    <div>
+        <h3>ZANCC</h3>
+        <div class="social-links">
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-instagram"></i>
+        </div><!--social-links end-->
+        <p>2019  ZANCC.com, DevAcademy</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function rowClicked(value) {
+            location.href = "/user?id=" + value;
+        }
+
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<table class="table table-hover text-center">
+    <thead class="thead-dark">
+    <tr>
+        <th class="align-middle" scope="col">#</th>
+        <th class="align-middle" scope="col">user name</th>
+        <th class="align-middle" scope="col">password</th>
+        <th class="align-middle" scope="col">User_name</th>
+        <th class="align-middle" scope="col">user age</th>
+        <th class="align-middle" scope="col">user email</th>
+        <th class="align-middle" scope="col">user join date </th>
+    </tr>
+    </thead>
+    <tbody class="tbody-light">
+
+    <tr  th:each="user :${users}"  th:onclick="'javascript:rowClicked(\'' + ${user.getUser_id()} + '\');'">
+
+        <td class="align-middle" th:text="${user.getUser_id()}"></td>
+        <td>
+            <h5 class="align-middle" th:text="${user.getUsername()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${user.getPassword()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${user.getUser_name()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${user.getUser_age()}"></h5>
+        </td>
+        <td>
+            <h5 class="align-middle" th:text="${user.getUser_email()}"></h5>
+        </td>
+        <td th:text= "${user.getUser_join_date()}">
+        </td>
+
+    </tr>
+    </form>
+    </tbody>
+</table>
+</body>
+</html>

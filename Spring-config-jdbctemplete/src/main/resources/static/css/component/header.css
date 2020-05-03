@@ -1,0 +1,125 @@
+
+
+/****************
+WRAPPER
+*****************/
+#wrapper {
+    min-width: 1000px;
+    background-color: #2d2d2d;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 15px gray;
+    align-items: center;
+
+}
+
+/*************
+HEADER & NAV
+**************/
+header {
+    height: 600px;
+  //  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://68.media.tumblr.com/37aa774749579b5a20e35fd40fc269e7/tumblr_ob7vuzk7qP1uwbmnzo4_1280.jpg") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url("/img/zinc1.png") no-repeat center center;
+
+}
+header nav {
+width: 80%;
+    margin-left: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+header nav .logo {
+    width: 4.8em;
+    height: 4.8em;
+    cursor: pointer;
+}
+header nav .nav {
+    text-transform: uppercase;
+    color: white;
+    display: flex;
+}
+header nav .nav li a{
+    font-size: .90em;
+    padding: 0 1em;
+    cursor: pointer;
+    color: white;
+
+    transition: color .25s ease;
+}
+header nav .nav li a:hover {
+    color: #5a89dc;
+}
+header nav .nav .active {
+    color: #5a89dc;
+}
+header nav .user {
+    display: flex;
+   // justify-content: space-between;
+    align-items: center;
+    width: 80px;
+}
+header nav .user a {
+    color: #cccccc;
+    cursor: pointer;
+}
+header nav .user a:hover {
+    color: #737373;
+}
+header nav .user a {
+    width: 50px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+header .movie-info {
+    margin-top: auto;
+    margin-bottom: auto;
+    text-transform: uppercase;
+    color: white;
+    width: 500px;
+    margin-left: 10em;
+}
+header .movie-info h1 {
+    font-size: 3.8em;
+    line-height: 1.2;
+}
+header .movie-info .genre {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 1.5em;
+}
+header .movie-info .genre li {
+    padding-right: .90em;
+    padding-left: .80em;
+    font-size: .75em;
+}
+header .movie-info button {
+    cursor: pointer;
+    border: 0;
+    padding: 1em 1.5em;
+    border-radius: 20px;
+    background: #DC685F;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: .75em;
+    margin-bottom: 8.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .movie-info button .fa-play-circle-o {
+    font-size: 1.7em;
+    margin-left: .50em;
+}
+header .movie-info h3, header .movie-info h4 {
+    font-weight: 200;
+}
+header .movie-info h3 {
+    text-transform: initial;
+}
+header .movie-info h4 {
+    color: #DC685F;
+}

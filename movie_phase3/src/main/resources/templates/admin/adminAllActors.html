@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Actors</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/MainStyle.css}"/>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+
+        function rowClicked(value) {
+            location.href = "/viewActor?id=" + value;
+        }
+        function deleteRow(value) {
+            location.href = "/deleteactor?id=" + value;
+            alert("delete "+value);
+        }
+
+        function editRow(value) {
+            var id= "show"+value;
+            document.getElementById(id).style.display = 'none';
+            id="edit"+value;
+            document.getElementById(id).style.display = '';
+
+
+        }
+    </script>
+    <script src="../../static/js/admin.js" th:src="@{/js/admin.js}"></script>
+
+    <style>
+        li a{
+            color: #1e1b26;
+        }
+    </style>
+</head>
+
+<body  th:style=" 'margin-top: 15xpx; color:white; background:url(' + @{/img/zinc1.png} + ')no-repeat ;   background-size: cover; background-position: top;  width: 100%; height: 100%;' ">
+
+<!-- NAV BAR -->
+
+<nav class="bannerA">
+    <div class="navBG">
+        <a class="btn a" style="right:5px" th:href="@{/manageMovies}">Movies</a>
+        <a class="btn a" style="right:90px" th:href="@{/ManageActors}">Actors</a>
+
+        <img class="btn b" style="left:0px" th:src="@{/img/Logo.png}" th:href="@{/}">
+        <div th:if="null==${user}" class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="margin-right: 9px;">
+                <img class="btn b" style="left:50px" th:src="@{/img/UserButton.png}">    </a>
+            <ul class="dropdown-menu form-wrapper" style="width: 300px; background: none; top: 50px; ">
+                <li>  <form action="#" th:action="@{/loginProcess}" th:object="${login}" method="post" style=" top:50px; background: none;">
+                    <br><br>
+                    <div class="form-group" style="top: 20px; " >
+                        <input type="text" class="form-control" placeholder="Username" required="required" th:field="*{username}">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Password" required="required" th:field="*{password}">
+                    </div>
+                    <input type="submit" class="log" value="Login"></input>     <input type="submit" class="log" value="sign up"></input>
+                    <div class="form-footer">
+                        <br>
+                        <a href="#" style="color: white; ">Forgot Your password?</a>
+                        <hr>
+                    </div>
+                </form>
+                </li>
+            </ul>
+        </div>
+        <div th:if="${user}">
+            <img class="" style="width: 100px; height: 70px; margin-left: 70px; margin-right: 20px;  "  th:src="${user.getUser_image()}">
+            <a class="btn a"  th:href="@{/logout}">log out</a>        </div>
+
+    </div>
+    <div style="margin-top: 50px;">
+        <table class="table table-borderless text-light options" >
+            <tr>
+                <th><ul>
+
+                    <li style="display: inline-block; ">
+                        <a  class="log"   th:href="@{/addActor}"><i class="fa fa-plus-circle"  > </i></a>
+
+                    </li>
+                </ul>
+                </th>
+
+                <th><a th:href="@{/ManageActors(sort= actor_name)}"><i class="fa fa-sort-alpha-asc" style="color: white;"  ></i></a> </th>
+                <th>
+                    <div class="input-group mb-3">
+
+                        <input id="search" class="form-control" onkeyup="myFunction()" type="search" results="5" placeholder="Search Movies..." >
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+
+
+                </th>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+</nav>
+
+
+<table class="table "  id="movies" style="border-collapse: collapse; width:80%; color: white; margin: 0px auto;
+    float: none; ">
+    <div th:each="actor:${all_actor}">
+        <tr   th:id="show+${actor.actor_id}">
+            <th ><img with="200" width="200" th:src="${actor.actor_profile_image}"/></th>
+            <th>
+<h5 class="align-top" style="text-align: left" th:text="${actor.actor_name}"></h5>
+                <h4 class="align-top" style="text-align: left" th:text="${actor.actor_gender}"></h4>
+                <p class="align-middle" style="text-align: left" th:text="${actor.actor_age}"></p>
+
+            </th>
+
+            <th > <br><a href="#" class="log"  th:onclick="'javascript:editRow(\'' + ${actor.actor_id} + '\');'"><i class="fa fa-edit"  > </i></a></th>
+            <th ><br><a href="#" class="log"   th:onclick="'javascript:deleteRow(\'' + ${actor.actor_id} + '\');'"><i class="fa fa-trash" > </i></a></th>
+        </tr>
+
+        <tr  th:id="edit+${actor.actor_id}" style="display: none; ">
+            <td colspan="6">
+                <form action="#" th:action="@{/editactor(id=${actor.actor_id})}" th:object="${newActor}" method="post">
+                    <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor title </p>
+                    <input class="col-md-4 text-center" type="text" th:field="*{actor_name}" />
+                    <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor Image </p>
+                    <input class="col-md-4 text-center" type="text" th:field="*{actor_profile_image}" />
+                    <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor Age</p>
+                    <textarea class="col-md-4 text-center"  th:field="*{actor_age}" />
+                    <p class="col-md-12 font-weight-bold mb-1 mt-1">Actor gender</p>
+                    <input class="col-md-4 text-center" type="text" th:field="*{actor_gender}" />
+
+                    <br/>
+                    <input type="submit"  ><i class="fa fa-save" style="color: #4676bd" > </i></input>
+                </form>
+            </td>
+        </tr>
+
+    </div>
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Our Movies</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $('#Allmovies').DataTable();
+    } );
+    function rowClicked(value) {
+        location.href = "/amovie?id=" + value;
+    }
+    function deleteRow(value) {
+        location.href = "/deletemovie?id=" + value;
+        alert("delete "+value);
+    }
+
+    function editRow(value) {
+        alert("edit "+value);
+
+        //    location.href = "/editmovie?id=" + value;
+        var id= "show"+value;
+        document.getElementById(id).style.display = 'none';
+        id="edit"+value;
+        document.getElementById(id).style.display = '';
+
+
+    }
+</script>
+<style>
+    li a{
+       color: #1e1b26;
+    }
+</style>
+</head>
+
+<body  th:style=" 'margin-top: 15xpx; color:white; background:url(' + @{/img/zinc1.png} + ')no-repeat ;   background-size: cover; background-position: top;  width: 100%; height: 100%;' ">
+
+<!-- NAV BAR -->
+
+
+<nav class="navbar navbar-inverse">
+            <span class="navbar-brand mb-0 h1">Zinc By Zancc</span>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <div th:if="${user}">
+                    <p>welcome to the movie </p><p th:text="${user.username}"> </p>
+                </div>
+            </form>
+        </ul>
+    </div>
+</nav>
+<ul><li style="display: inline-block; ">
+<div class="dropdown">
+    <button class="btn btn-outline-light dropdown-toggle" type="button" data-toggle="dropdown">Filter By Category
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+    <li th:each="category:${genre}" >
+        <a th:text="${category}" th:href="@{/viewMovies/category(genre=${category})} " >Page 1-1</a>
+    </li>
+</ul>
+
+</div>
+</li>
+    <li style="display: inline-block; ">
+
+
+<div class="dropdown">
+    <button class="btn btn-outline-light dropdown-toggle" type="button" data-toggle="dropdown">Sort By Field
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+        <li ><a href="/viewMovies?sort=movie_title"> Title</a></li>
+        <li ><a  href="/viewMovies?sort=movie_release_date"> Release </a></li>
+        <li ><a   href="/viewMovies?sort=movie_duration"> Duration</a></li>
+
+
+    </ul>
+</div>
+    </li>
+</ul>
+</div>
+ <a  class="btn btn-outline-success float-right"   th:href="@{/addMovie}"><i class="fa fa-plus-circle"  > </i></a>
+
+<table class="table "  id="Allmovies" style="border-collapse: collapse; width:80%; color: white; margin: 0px auto;
+    float: none; ">
+    <div th:each="movies:${movie}">
+    <tr   th:id="show+${movies.getMovie_id()}">
+        <th ><img with="200" width="200" th:src="${movies.getMovie_cover_image()}"/></th>
+        <th>
+
+            <h5 class="align-top" style="text-align: left" th:text="${movies.getMovie_title()}"></h5>
+            <p class="align-middle" style="text-align: left" th:text="${movies.getMovie_summery()}"></p>
+            <p style="float: left" >Release Date: </p>
+            <p class="align-middle" style="text-align: left" th:text="${movies.getMovie_release_date()}"></p>
+            <p style="float: left" >Duration: </p>
+            <p class="align-middle" style="text-align: left" th:text="${movies.getMovie_duration()}"></p>
+            <p class="align-middle" style="text-align: left" th:text="${movies.getMovie_duration()}"></p>
+
+        </th>
+
+        <th>  <iframe width="300" height="135" th:src="@{https://www.youtube.com/embed/{url}
+           (url=${movies.getMovie_trailer()})}"
+                      frameborder="0" alt="no video attached" allowfullscreen="1"></iframe>
+        </th>
+        <th > <a href="#" class="btn btn-primary  btn-block"  th:onclick="'javascript:editRow(\'' + ${movies.getMovie_id()} + '\');'"><i class="fa fa-edit"  > </i></a></th>
+        <th ><a href="#" class="btn btn-danger  btn-block"   th:onclick="'javascript:deleteRow(\'' + ${movies.getMovie_id()} + '\');'"><i class="fa fa-trash" > </i></a></th>
+    </tr>
+
+    <tr  th:id="edit+${movies.getMovie_id()}" style="display: none; ">
+        <td colspan="6">
+            <form action="#" th:action="@{/editmovie(id=${movies.getMovie_id()})}" th:object="${newMovie}" method="post">
+                <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Title </p>
+                <input class="col-md-4 text-center" type="text" th:field="*{movie_title}" />
+                <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie cover </p>
+                <input class="col-md-4 text-center" type="text" th:field="*{movie_cover_image}" />
+                <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Summary</p>
+                <textarea class="col-md-4 text-center"  th:field="*{movie_summery}" />
+                <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Duration</p>
+                <input class="col-md-4 text-center" type="text" th:field="*{movie_duration}" />
+                <p class="col-md-12 font-weight-bold mb-1 mt-1">movie genre</p>
+                <input class="col-md-4 text-center" type="text" th:field="*{movie_genre}"/>
+                <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Release data </p>
+                <input class="col-md-4 text-center" type="date" th:field="*{movie_release_date}" />
+                <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Trailer</p>
+                <input class="col-md-4 text-center"  type="text" th:field="*{movie_trailer}" />
+                <br/>
+        <input type="submit"  ><i class="fa fa-save" style="color: #4676bd" > </i></input>
+            </form>
+        </td>
+    </tr>
+
+    </div>
+</table>
+
+<div class="container text-center">
+    <a href="/" class="btn btn-success">Back To Homepage</a>
+</div>
+</body>
+</html>

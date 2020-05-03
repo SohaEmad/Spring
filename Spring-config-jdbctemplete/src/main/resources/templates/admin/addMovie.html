@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Movie</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <style>
+        img:hover {
+            border: 3px solid black;
+        }
+        a{
+            color: white;
+            margin-left: 5px;
+        }
+        a:hover{
+            color: #9b9b9b;
+        }
+    </style>
+    <script>
+        var actors="";
+        function addactor(actor_id) {
+            actors+=actor_id+",";
+            var id= "img"+actor_id;
+            document.getElementById(id).style =" border: 3px solid green; filter: grayscale(100%);";
+
+            alert(actors);
+        }
+    </script>
+</head>
+<body style="background: #1e1b26; color: white;  ">
+    <div class="navbar navbar-inverse text-white">
+        <div class="nav-row">
+            <div class="nav-logo" style="display: inline; ">
+                <a href="#" style="padding-right: 20px; ">ZINC </a>
+            </div>
+            <div class="nav-controls" style="display: inline; ">
+                <a href="#">Home</a>
+                <a href="#">Movie</a>
+                <a href="#">Series</a>
+            </div>
+        </div>
+    </div>
+<div class="row" height="100%" th:style=" 'margin-top: 15xpx; color:white; background:url(' + @{/img/zinc1.png} + ')no-repeat ;   background-size: cover; background-position: top;  width: 100%; height: 100%;' ">
+
+        <div class="col" style="margin-left: 25px; " height="900px">
+
+    <h1 class="pb-2">Add a new Movie</h1>
+    <form action="#" th:action="@{/addMovie}" th:object="${newMovie}" method="post" width="fill" >
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Title </p>
+        <input class="col-md-7 text-center" type="text" th:field="*{movie_title}" />
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie image cover </p>
+        <input class="col-md-7 text-center" type="text" th:field="*{movie_cover_image}" />
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Summary</p>
+        <textarea class="col-md-7 text-center"  th:field="*{movie_summery}" />
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Duration</p>
+        <input class="col-md-7 text-center" type="text" th:field="*{movie_duration}" />
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">movie genre</p>
+        <input class="col-md-7 text-center" type="text" th:field="*{movie_genre}"/>
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Release data </p>
+        <input class="col-md-7 text-center" type="date" th:field="*{movie_release_date}" />
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">Movie Trailer</p>
+        <input class="col-md-7 text-center"  type="text" th:field="*{movie_trailer}" />
+        <br/>
+        <input class="btn btn-danger mt-2 mr-2" type="reset" value="Reset"/>
+        <input class="btn btn-primary mt-2 ml-2" type="submit" value="Submit"/>
+    </form>
+        </div>
+        <div class="col">
+    <!--    <div style=" margin-top: 50px; " width="500px"  >-->
+            <p> Add the Movie Cast </p>
+<ul>
+        <li th:each="actor:${allactors}" style="display: inline-block; margin: 0 10px 0 0; "   th:onclick="'javascript:addactor(\'' + ${actor.actor_id} + '\');'">
+           <figure>
+            <img class="rounded-circle" th:id="img+${actor.actor_id}"  th:width="100" th:height="100" th:src="${actor.getActor_profile_image()}"  >
+     <figcaption th:text="${actor.actor_name}"></figcaption>
+           </figure>
+        </li>
+</ul>
+        </div>
+
+
+</div>
+
+</div>
+</body>
+</html>

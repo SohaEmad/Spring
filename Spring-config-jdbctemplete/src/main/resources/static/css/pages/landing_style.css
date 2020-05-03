@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+@import "static/css/component/header.css";
+@import "static/css/component/search_rang.css";
+@import "static/css/component/footer.css";
+
+/***************
+VARIABLES
+****************/
+/****************
+GLOBAL
+*****************/
+*, *:before, *:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+main {
+    width: 800px;
+    background: #2d2d2d;
+    margin: auto;
+    -webkit-transform: translateY(-5%);
+    transform: translateY(-5%);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 1.5em 2em;
+}
+main .options {
+    display: flex;
+    text-align: center;
+    text-transform: uppercase;
+}
+main .options .active {
+    color: #DC685F;
+    border-bottom: solid 2px #DC685F;
+}
+main .options li a{
+    flex: 1;
+    padding-bottom: 1em;
+    padding-right: 1em;
+
+    border-bottom: solid 1px lightgray;
+    font-weight: 600;
+    font-size: .80em;
+    color: #737373;
+    cursor: pointer;
+}
+main .options li:hover {
+    color: #DC685F;
+    border-bottom-color: #DC685F;
+    border-bottom-width: 2px;
+}
+main #movies {
+    min-height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+main #movies figure {
+    background-color: white;
+    width: 14em;
+    margin: .50em;
+    box-shadow: 0 5px 15px gray;
+    overflow: hidden;
+    position: relative;
+}
+main #movies figure img {
+    height: 21em;
+}
+main #movies figure figcaption {
+    line-height: 2;
+    padding: 0 .80em;
+    height: 90px;
+}
+main #movies figure figcaption h5 {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #737373;
+}
+main #movies figure figcaption p {
+    text-transform: capitalize;
+    font-size: .70em;
+    font-weight: 600;
+    color: #DC685F;
+}
+main #movies figure figcaption .rating {
+    display: flex;
+    align-items: center;
+    margin:auto;
+}
+main #movies figure figcaption .rating .fa-star {
+    color: #dcc434;
+
+}
+main #movies figure figcaption button {
+    border: 0;
+    font-size: 17px;
+    cursor: pointer;
+    color: #DC685F;
+    background-color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+   /* padding: 8px;*/
+}
+

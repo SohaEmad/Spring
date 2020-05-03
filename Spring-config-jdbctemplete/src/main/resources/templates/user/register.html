@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book - Bookcase</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="text-center jumbotron pt-1">
+    <h1 class="pb-2">Add a new book to your collection</h1>
+    <form action="#" th:action="@{/registerProcess}" th:object="${user}" method="post">
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">User name</p>
+        <input class="col-md-4 text-center" type="text" th:field="*{username}" />
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">password</p>
+        <input class="col-md-4 text-center" type="password" th:field="*{password}" />
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">User Name</p>
+        <input class="col-md-4 text-center" type="text" th:field="*{user_name}" placeholder="User_name"/>
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">age</p>
+        <input class="col-md-4 text-center" type="number" th:field="*{user_age}" placeholder="age"/>
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">user email</p>
+        <textarea class="col-md-4 text-center" type="email" th:field="*{user_email}" placeholder="enter your email here "/>
+        <p class="col-md-12 font-weight-bold mb-1 mt-1">date</p>
+        <input class="col-md-4 text-center"  type="datetime-local" th:field="*{user_join_date}" placeholder="today date "/>
+        <br/>
+        <input class="btn btn-danger mt-2 mr-2" type="reset" value="Reset"/>
+        <input class="btn btn-primary mt-2 ml-2" type="submit" value="Submit"/>
+    </form>
+</div>
+<div class="text-center">
+    <a class="btn btn-success" href="/">Back to Homepage</a>
+</div>
+</body>
+</html>
